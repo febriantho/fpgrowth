@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Change Confidence Value</h3>
+                    </div>
+                    <form action="/confidence/2" method="POST">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="confidence">Confidence</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control number" 
+                                    id="confidence"
+                                    name="value"
+                                    value={{ confidence_value }}
+                                    placeholder="Enter confidence value"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h3 class="card-title">Change Support Value</h3>
+                    </div>
+                    <form action="/support/1" method="POST">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="support">Support Value</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control number" 
+                                    id="support"
+                                    name="value"
+                                    value={{ support_value }}
+                                    placeholder="Enter support value"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block script %}
+<script>
+    $('.number').keypress(function(event) {
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+          event.preventDefault();
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,244 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='plugins/select2/css/select2.min.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Data Filter</h4>
+                        <div class="row">
+                            <!-- FILTER DATE RANGE -->
+                            <!-- <div class="col-md-6">
+                                <form method="POST">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="date1">From:</label>
+                                                <input id="datetimepicker1" name="date1" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="date2">To:</label>
+                                                <input id="datetimepicker2" name="date2" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <button type="submit" class=" btn btn-primary">
+                                                Filter
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div> -->
+
+                            <!-- FILTER COMBO BOX SELECT -->
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <form method="POST">
+                                            <div class="form-group">
+                                                <label>Month</label>
+                                                <select id="#selectMonth" name="select-month" class="form-control select2 select-hidden-accessible" style="width: 100%;" data-select-id="1" tabindex="-1" aria-hidden="true"> 
+                                                    {% for month in data_month %}
+                                                        <option data-select-id="{{ month }}">{{ month }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <button type="submit" class=" btn btn-primary">
+                                                Filter
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <form method="POST">
+                                            <div class="form-group">
+                                                <label>Year</label>
+                                                <select id="#selectYear" name="select-year" class="form-control select2 select-hidden-accessible" style="width: 100%;" data-select-id="1" tabindex="-1" aria-hidden="true">
+                                                    {% for year in data_year %}
+                                                        <option data-select-id="{{ year }}">{{ year }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <button type="submit" class=" btn btn-primary">
+                                                Filter
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                            <h4>Asosiation Rules</h4>
+                            <h5>Export:</h5>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="example1" class="table table-bordered table-striped dataTable dtr-inline"
+                                        role="grid" aria-describedby="example2_info">
+                                        <thead class="bg-primary">
+                                            <tr role="row">
+                                                <th>No.</th>
+                                                <th tabindex="0" aria-controls="example2"
+                                                    rowspan="1" colspan="1" aria-sort="ascending"
+                                                    aria-label="transaction id: activate to sort column descending">
+                                                    Antecedents</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                    colspan="1"
+                                                    aria-label="transaction date: activate to sort column ascending">
+                                                    Consequents</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                    colspan="1" aria-label="products: activate to sort column ascending">
+                                                    Confidence</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                    colspan="1" aria-label="products: activate to sort column ascending">
+                                                    Level</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                    colspan="1" aria-label="products: activate to sort column ascending">
+                                                    Description</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                    colspan="1" aria-label="products: activate to sort column ascending">
+                                                    Rank</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for key,row in rules.iterrows() %}
+                                                <tr>
+                                                    <td></td>
+                                                    <td>{{ row['antecedents'] }}</td>
+                                                    <td>{{ row['consequents'] }}</td>
+                                                    <td>{{ row['confidence'] * 100 }}%</td>
+                                                    <td>
+                                                        {% if row['confidence'] * 100 <= 40 %}
+                                                            Low
+                                                        {% elif  ( (row['confidence'] * 100 > 40) and (row['confidence'] * 100 <= 70) ) %}
+                                                            Medium
+                                                        {% elif row['confidence'] * 100 > 70 %}
+                                                            High
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if row['confidence'] * 100 <= 40 %}
+                                                            TIDAK COCOK UNTUK DI JADIKAN PAKET PENJUALAN
+                                                        {% elif  ( (row['confidence'] * 100 > 40) and (row['confidence'] * 100 <= 70) ) %}
+                                                            COCOK UNTUK DI JADIKAN PAKET PENJUALAN
+                                                        {% elif row['confidence'] * 100 > 70 %}
+                                                            SANGAT COCOK UNTUK DI JADIKAN PAKET PENJUALAN
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{{ row['rank'] }}</td>                                               
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='plugins/moment/moment.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/select2/js/select2.full.min.js') }}"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.select2').select2();
+        // $('').select2();
+        var currentdate = new Date();
+        var date = "TANGERANG, " + ("0" + currentdate.getDate()).slice(-2) + "-"
+                + ("0" + (currentdate.getMonth() + 1)).slice(-2)  + "-"
+                + currentdate.getFullYear();
+        
+        $('#datetimepicker1').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
+        $('#datetimepicker2').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
+
+        var t = $('#example1').DataTable({
+            "responsive": true, 
+            "lengthChange": false, 
+            "autoWidth": false,
+            "buttons": [{
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    title: 'Laporan Data Rekomendasi',
+                    exportOptions: {
+                        columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+                    },
+                    customize: function (doc) {                                            
+                        doc.content.splice( 0, 0, {
+                            margin: [ 0, 0, 0, 30 ],
+                            alignment: 'center',
+                            image: 'data:image/png;base64,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'
+                        } );
+                        doc.content.splice( 3, 0, {
+                            margin: [ 0, 50, 50, 0 ],
+                            alignment: 'right',
+                            text: date
+                        } );
+                        doc.content.splice( 4, 0, {
+                            margin: [ 0, 50, 50, 0 ],
+                            alignment: 'right',
+                            text: 'Maryono'
+                        } );
+                        doc.content.splice( 5, 0, {
+                            margin: [ 0, 10, 50, 0 ],
+                            alignment: 'right',
+                            text: 'Owner'
+                        } );
+                        doc.content[1].margin = [ 15, 0, 15, 20 ]
+                        doc.content[2].margin = [ 15, 0, 15, 0 ]
+                    }
+                },],
+            columnDefs: [
+                {
+                    searchable: true,
+                    orderable: false,
+                    targets: 0,
+                },
+            ],
+            order: [[6, 'asc']],
+        });
+
+        t.buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)')
+    
+        t.on('order.dt search.dt', function () {
+            let i = 1;
+    
+            t.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                this.data(i++);
+            });
+        }).draw();
+    });
+
+    </script>
+{% endblock %}

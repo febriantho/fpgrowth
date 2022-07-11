@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fpgrowth | Log in</title>
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/fontawesome-free/css/all.min.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/adminlte.min.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/toastr/toastr.min.css') }}">
+</head>
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" width="150px" alt="">
+            <h2 class="mt-3">Welcome</h2>
+        </div>
+
+        <div class="card">
+            <div class="card-body login-card-body">
+                <form method="POST">
+                    <div class="input-group mb-3">
+                        <input 
+                            type="email" 
+                            class="form-control" 
+                            placeholder="Email"
+                            name="email"
+                        >
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input 
+                            type="password" 
+                            class="form-control" 
+                            placeholder="Password"
+                            name="password"
+                        >
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='dist/js/adminlte.min.js?v=3.2.0') }}"></script>
+
+    <script src="{{ url_for('static', filename='plugins/toastr/toastr.min.js') }}"></script>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            {% if category == 'success' %}
+                <script>
+                    toastr.success('{{ message }}')
+                </script>
+            {% else %}
+                <script>
+                    toastr.error('{{ message }}')
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+mysqlclient
+flask
+flask-login
+flask-sqlalchemy
+mysql-connector
+mlxtend
+openpyxl
+natsort
