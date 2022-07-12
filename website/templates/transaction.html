@@ -326,7 +326,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p></p>
+                    <p id="uptext"></p>
+                    <p id="upproduct"></p>
                     <input type="hidden" id="upstock">
                     <input type="hidden" id="uptype">
                     <input type="hidden" id="upid">
@@ -445,12 +446,12 @@
                     var qtt = $('#qtt'+no).val();   
                     $.each(products, function(index, product) {
                         if(item == product.name){
-                            if(product.stock - qtt < 0){
-                                $('#modal-upselling p').text('Product '+product.name+' is out of stock. Try another same product?')
+                            console.log(product.name +' '+ product.stock)
+                            if((product.stock - qtt) < 0){
+                                $('#modal-upselling #uptext').text('Product '+product.name+' habis. Apakah anda mau memilih produk yang bertipe sama di bawah ini?')
                                 $('#modal-upselling #upstock').val(product.stock);
                                 $('#modal-upselling #uptype').val(product.type);
                                 $('#modal-upselling #upid').val(no);
-                                $('#modal-upselling').modal('toggle')
                             } else {
                                 $('#price'+no).val(product.price * qtt );
                             }
@@ -463,11 +464,41 @@
                             $('#price'+no).val(product.price).text(product.price); 
                         }  
                     });
+
+                    var type = $('#uptype').val()
+                    var stock = $('#upstock').val()
+                    var upid = $('#upid').val()
+                    console.log(upid)
+                    var upsellingList = []
+                    $.each(products, function(index, product) {
+                        if(product.type == type){
+                            if (product.stock > stock){
+                                upsellingList.push(product)
+                            }
+                        }
+                    });
+                    upsellingList.sort((a, b) => {
+                        return b.price - a.price
+                    })
+                    if(upsellingList.length > 0 ){
+                        $('#modal-upselling #upproduct').text(upsellingList[0].name+' dengan harga '+upsellingList[0].price)
+                    }
+
                     var sum = 0;
                     $('#transactionForm .price').each(function() {
                         sum += Number($(this).val());
                     });
                     $('#total-price').val(sum);
+
+                    $.each(products, function(index, product) {
+                        if(item == product.name){
+                            console.log(product.name +' '+ product.stock)
+                            if((product.stock - qtt) < 0){
+                                $('#modal-upselling').modal('toggle')
+                            }
+                        }
+                    })
+
                 });
 
                 $('#button-upselling').on('click', function() {
@@ -556,8 +587,6 @@
 
         });
 
-
-        
         
         var currentdate = new Date();
         var date = "TANGERANG, " + ("0" + currentdate.getDate()).slice(-2) + "-"
@@ -642,16 +671,16 @@
             $.each(products, function(index, product) {
                 if(item == product.name){
                     if(product.stock - qtt < 0){
-                        $('#modal-upselling p').text('Product '+product.name+' is out of stock. Try another same product?')
+                        $('#modal-upselling #uptext').text('Product '+product.name+' habis. Apakah anda mau memilih produk yang bertipe sama di bawah ini?')
                         $('#modal-upselling #upstock').val(product.stock);
                         $('#modal-upselling #uptype').val(product.type);
                         $('#modal-upselling #upid').val(0);
-                        $('#modal-upselling').modal('toggle')
                     } else {
                         $('#price').val(product.price * qtt );
                     }
                 }
             });
+
             var val = this.value
             console.log(val)
             $.each(products, function(index, product) { 
@@ -661,11 +690,41 @@
                 }  
             });
 
+            var type = $('#uptype').val()
+            var stock = $('#upstock').val()
+            var upid = $('#upid').val()
+            console.log(upid)
+            var upsellingList = []
+            $.each(products, function(index, product) {
+                if(product.type == type){
+                    if (product.stock > stock){
+                        upsellingList.push(product)
+                    }
+                }
+            });
+
+            upsellingList.sort((a, b) => {
+                return b.price - a.price
+            })
+
+            if(upsellingList.length > 0 ){
+                $('#modal-upselling #upproduct').text(upsellingList[0].name+' dengan harga '+upsellingList[0].price)
+            }
+
             var sum = 0;
             $('#transactionForm .price').each(function() {
                 sum += Number($(this).val());
             });
             $('#total-price').val(sum);
+
+            $.each(products, function(index, product) {
+                if(item == product.name){
+                    console.log(product.name +' '+ product.stock)
+                    if((product.stock - qtt) < 0){
+                        $('#modal-upselling').modal('toggle')
+                    }
+                }
+            })
         });
 
         $('#button-upselling').on('click', function() {
@@ -828,11 +887,10 @@
                 $.each(products, function(index, product) {
                     if(item == product.name){
                         if(product.stock - qtt < 0){
-                            $('#modal-upselling p').text('Product '+product.name+' is out of stock. Try another same product?')
+                            $('#modal-upselling #uptext').text('Product '+product.name+' habis. Apakah anda mau memilih produk yang bertipe sama di bawah ini?')
                             $('#modal-upselling #upstock').val(product.stock);
                             $('#modal-upselling #uptype').val(product.type);
                             $('#modal-upselling #upid').val(no);
-                            $('#modal-upselling').modal('toggle')
                         } else {
                             $('#price'+no).val(product.price * qtt );
                         }
@@ -845,11 +903,39 @@
                         $('#price'+no).val(product.price).text(product.price); 
                     }  
                 });
+
+                var type = $('#uptype').val()
+                var stock = $('#upstock').val()
+                var upid = $('#upid').val()
+                console.log(upid)
+                var upsellingList = []
+                $.each(products, function(index, product) {
+                    if(product.type == type){
+                        if (product.stock > stock){
+                            upsellingList.push(product)
+                        }
+                    }
+                });
+                upsellingList.sort((a, b) => {
+                    return b.price - a.price
+                })
+
+                if(upsellingList.length > 0 ){
+                    $('#modal-upselling #upproduct').text(upsellingList[0].name+' dengan harga '+upsellingList[0].price)
+                }
                 var sum = 0;
                 $('#transactionForm .price').each(function() {
                     sum += Number($(this).val());
                 });
                 $('#total-price').val(sum);
+                $.each(products, function(index, product) {
+                    if(item == product.name){
+                        console.log(product.name +' '+ product.stock)
+                        if((product.stock - qtt) < 0){
+                            $('#modal-upselling').modal('toggle')
+                        }
+                    }
+                })
             });
 
             $('#button-upselling').on('click', function() {
