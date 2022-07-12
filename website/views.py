@@ -211,6 +211,7 @@ def transaction():
                             transactions=transactions, 
                             products=json.dumps(items),
                             services=json.dumps(services), 
+                            rules=pd.DataFrame(columns= ['antecedents', 'consequents', 'confidence', 'rank']),
                             user=current_user)
     
     return render_template('transaction.html', 
