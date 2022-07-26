@@ -3,100 +3,11 @@
 {% block content %}
 <section class="content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header border-0">
-                        <h1 class="card-title">Recommendation of this month</h1>
-                    </div>
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-striped table-valign-middle">
-                            <thead>
-                                <tr>
-                                    <th>Rank</th>
-                                    <th>Product/Service</th>
-                                    <th>Confidence</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    {% for key,row in rules_month.iterrows() %}
-                                        <tr>
-                                            <td>{{ row['rank'] }}</td>                                               
-                                            <td>{{ row['antecedents'] }} => {{ row['consequents'] }}</td>
-                                            <td>{{ row['confidence'] * 100 }}%</td>
-                                        </tr>
-                                    {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header border-0">
-                        <h1 class="card-title">Recommendation of this year</h1>
-                    </div>
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-striped table-valign-middle">
-                            <thead>
-                                <tr>
-                                    <th>Rank</th>
-                                    <th>Product/Service</th>
-                                    <th>Confidence</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    {% for key,row in rules_year.iterrows() %}
-                                        <tr>
-                                            <td>{{ row['rank'] }}</td>                                               
-                                            <td>{{ row['antecedents'] }} => {{ row['consequents'] }}</td>
-                                            <td>{{ row['confidence'] * 100 }}%</td>
-                                        </tr>
-                                    {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-sm-4">
-                <div class="info-box shadow-none">
-                    <span class="info-box-icon bg-info"><i class="fas fa-clock"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Jam Operasional</span>
-                        <span class="info-box-number">08.30–17.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="info-box shadow-none">
-                    <span class="info-box-icon bg-info"><i class="fas fa-phone"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">No. Hp</span>
-                        <span class="info-box-number">0813-8522-8015</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="info-box shadow-none">
-                    <span class="info-box-icon bg-info"><i class="fas fa-map-marked-alt"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Alamat</span>
-                        <span class="info-box-number">Jalan Raya Mauk km9 no 72, gardu, Sepatan, Kec. Sepatan, Kota Tangerang, Banten 15520</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
+       
         <div class="row mt-5">
             <div class="col-sm-12">
                 <div class="card card-widget widget-user shadow-lg">
-                    <div class="widget-user-header text-white bg-secondary" >
-                        <h3 class="widget-user-username text-right">PD Alin Bengkel Mobil</h3>
-                    </div>
-                    <div class="widget-user-image">
-                        <img class="img-circle" src="{{ url_for('static', filename='logo.png')}}" alt="User Avatar">
-                    </div>
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-sm-4 border-right">
@@ -118,13 +29,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-12 mt-5">
-                                <p>PD Alin Bengkel Mobil di dirikan pada tahun 2003 dan mengkhususkan diri dalam perbaikan kendaraan roda 4 dan penjualan suku cadang kendaraan (Sparepart) roda 4 berjenis SUV, MPV, Pickup, Sedan dan City Car. PD Alin Bengkel Mobil biasa di singkat dengan sebutan ABM yang membuat para pelanggan mudah untuk mengingat namanya, ABM merupakan salah satu bengkel dan sparepart mobil yang paling laku di daerah sepatan kabupaten tangerang, mengingat di daerah sepatan masih belum banyak bengkel mobil yang memfokuskan penjualan sparepart mobil yang lengkap, maka banyak pelanggan ABM yang datang dari luar tangerang seperti Jakarta dan Bogor karena ABM sendiri memiliki para tenaga ahli yang profesional yang sudah belasan tahun bekerja di bidangnya.</p>
-                                <p>Pada tahun 2010 owner Alin Bengkel Mobil melebarkan sayapnya dengan membuka usaha baru yaitu usaha dagang sparepart mobil yang berada di depan bengkel itu sendiri di karenakan owner melihat adanya kesempatan emas untuk meningkatkan pendapatan dan menarik pelanggan baru yang membeli sparepart tersebut untuk servis di Alin Bengkel Mobil dengan strategi discount jasa servis setiap pembelian dan memasangan sparepart di bengkel tersebut, juga untuk memangkas waktu dalam pengerjaan servis mobil karena harus memesan dan membeli sparepart mobil di toko lain yang jaraknya cukup jauh dari bengkel</p>
-                            </div>
-                        </div>
-                
                     </div>
                 </div>
             </div>

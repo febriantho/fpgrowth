@@ -81,7 +81,7 @@
 
                     <div class="card-body">
                         <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                            <h4>Asosiation Rules</h4>
+                            <h4>Association Results</h4>
                             <h5>Export:</h5>
 
                             <div class="row">
@@ -94,11 +94,11 @@
                                                 <th tabindex="0" aria-controls="example2"
                                                     rowspan="1" colspan="1" aria-sort="ascending"
                                                     aria-label="transaction id: activate to sort column descending">
-                                                    Antecedents</th>
+                                                    First Item</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                     colspan="1"
                                                     aria-label="transaction date: activate to sort column ascending">
-                                                    Consequents</th>
+                                                    Second Item</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                     colspan="1" aria-label="products: activate to sort column ascending">
                                                     Confidence</th>
@@ -131,11 +131,11 @@
                                                     </td>
                                                     <td>
                                                         {% if row['confidence'] * 100 <= 40 %}
-                                                            TIDAK COCOK UNTUK DI JADIKAN PAKET PENJUALAN
+                                                            Not Suitable For Sales Packages
                                                         {% elif  ( (row['confidence'] * 100 > 40) and (row['confidence'] * 100 <= 70) ) %}
-                                                            COCOK UNTUK DI JADIKAN PAKET PENJUALAN
+                                                            Suitable for Sales Packages
                                                         {% elif row['confidence'] * 100 > 70 %}
-                                                            SANGAT COCOK UNTUK DI JADIKAN PAKET PENJUALAN
+                                                            Very Suitable For Making Sales Packages
                                                         {% endif %}
                                                     </td>
                                                     <td>{{ row['rank'] }}</td>                                               

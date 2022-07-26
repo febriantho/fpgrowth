@@ -148,7 +148,7 @@
                             </h5>
                             <select id="rec" class="form-control select2 select-hidden-accessible" style="width: 100%;" data-select-id="1" tabindex="-1" aria-hidden="true"> 
                                 {% for key,row in rules.iterrows() %}
-                                    <option value="{{ '{},{}'.format(row.antecedents, row.consequents) }}">{{ 'Paket {}: {} dan {}'.format(key, row.antecedents, row.consequents) }}</option>
+                                    <option value="{{ '{},{}'.format(row.antecedents, row.consequents) }}">{{ 'Paket Penjualan : {} dan {}'.format(row.antecedents, row.consequents) }}</option>
                                 {% endfor %}
                             </select>
                             <button id="recButton" type="button" class="mt-2 btn btn-primary">
