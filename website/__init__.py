@@ -9,7 +9,7 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'this is secret key'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@127.0.0.1/fpgrowth"
+    app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:Cipuy-09@127.0.0.1/fpgrowth"
     db.init_app(app)
 
     from .views import views

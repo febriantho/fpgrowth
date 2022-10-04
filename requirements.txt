@@ -6,3 +6,4 @@ mysql-connector
 mlxtend
 openpyxl
 natsort
+mysql-connector-python
